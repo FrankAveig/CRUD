@@ -1,7 +1,9 @@
-body{
-    background-color: #1a1a1a;
+body {
+    background-image: linear-gradient(to right, #fc5c7d, #6a82fb);
+
     color: white;
 }
+
 
 .hide{
     display: none;
@@ -17,21 +19,25 @@ h2{
 }
 
 table{
-
-    width: 80%;
+    color: black;
+    background-color: white;    width: 80%;
     margin: auto;
-    border: 1px solid white;
     border-collapse: collapse;
-    
+    border-radius: 10px;
+}
+td{
+    border-top: 1px solid rgb(57,57,57);
+
 }
 td,th{
+    
     width: 25%;
     text-align: center;
-    border-bottom: 1px solid white;
     padding: 10px 20px;
 }
+
  th:nth-child(1),td:nth-child(1){
-    border-right: 1px solid white;
+    border-right: 1px solid rgb(57,57,57);
 }
 form{
     width: fit-content;
