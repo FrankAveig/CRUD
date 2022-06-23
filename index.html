@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/estilos.css">
+    <title>Document</title>
+</head>
+<body>
+    
+
+        <h1>Control de vacunación de mascotas</h1>
+        <section class="controles">
+            <button onclick="show()">Nuevo ingreso</button>
+            <button>Buscar</button>
+        </section>
+
+        
+    <section id="formulario" class="">
+        <form>
+            <h2>Nuevo Ingreso</h2>
+            <div class="nombre inputContainer">
+                <label for="">Nombre</label>
+                <input type="text" id="inputNombre">
+            </div>
+            <div class="fechaNacimiento inputContainer">
+                <label for="">Fecha de nacimiento</label>
+                <input type="text" id="inputFechaNacimiento">
+            </div>
+            <div class="vacuna inputContainer">
+                <label for="">Vacuna</label>
+                <input type="text" id="inputVacuna">
+            </div>
+            <div class="fechaVacunacion inputContainer">
+                <label for="">Fecha de Vacunación</label>
+                <input type="date" id="inputFechaVacunacion">
+            </div>
+            <div class="fechaRevacunacion inputContainer">
+                <label for="">Fecha de Revacunacion</label>
+                <input type="text" id="inputNombre">
+            </div>
+            <div class="">
+                <button type="button" onclick="hide()">Guardar</button>
+            </div>
+        </form>
+    </section>
+
+    <main>
+        <table id="table">
+            <thead  >
+                <tr >
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Fecha de nacimiento</th>
+                    <th scope="col">Vacuna</th>
+                    <th>Fecha de Vacunación</th>                
+                    <th>Fecha de Revacunación</th>   
+                    <th></th>             
+                    <th></th>             
+                </tr>
+            </thead>
+            <tbody>
+                <td>01</td>
+                <td>Welayker</td>
+                <td>01/01/2002</td>
+                <td>Triple Felina</td>
+                <td>01/03/2003</td>
+                <td>01/04/2003</td>
+                <td><button>Editar</button></td>
+                <td><button>Eliminar</button></td>
+            </tbody>
+        </table>
+    </main>
+    <script src="./index.js"></script>
+</body>
+</html>
