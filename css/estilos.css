@@ -1,7 +1,6 @@
 body {
     background-image: linear-gradient(to right, #fc5c7d, #6a82fb);
 
-    color: white;
 }
 
 
@@ -20,7 +19,7 @@ h2{
 
 table{
     color: black;
-    background-color: white;    width: 80%;
+    background-color: rgba(255, 255, 255, 0.582);    width: 80%;
     margin: auto;
     border-collapse: collapse;
     border-radius: 10px;
@@ -68,4 +67,13 @@ form button{
     flex-direction: column;
     margin-top: 20px;
     align-items: center;
+}
+.fa-backspace{
+    color: red;
+    cursor: pointer;
+}
+
+.fa-edit{
+    color: green;
+    cursor: pointer;
 }
