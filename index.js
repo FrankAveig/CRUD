@@ -27,7 +27,15 @@ let mascotas = [
         vacuna:'Rabia',
         fechaVacunacion:'2022-06-08',
         fechaRevacunacion:'2022-07-08'
-    }
+    },
+    {
+        nombre:'Oreo',
+        fechaNacimiento:'2022-05-08',
+        vacuna:'Rabia',
+        fechaVacunacion:'2022-06-08',
+        fechaRevacunacion:'2022-07-08'
+    },
+    
 ]
 let busqueda= [];
 
@@ -35,12 +43,21 @@ function show(id){
 
 
     if(id==='formBuscar'){
-        formBuscar.classList.remove('hide')
-        formulario.classList.add('hide')
+        if(formBuscar.classList.contains('hide')){
+            formBuscar.classList.remove('hide')
+            formulario.classList.add('hide')
+        }else{
+            formBuscar.classList.add('hide')
+        }
     }
     if(id==='formulario'){
-        formBuscar.classList.add('hide')
-        formulario.classList.remove('hide')
+        if(formulario.classList.contains('hide')){
+            formBuscar.classList.add('hide')
+            formulario.classList.remove('hide')
+
+        }else{
+            formulario.classList.add('hide')
+        }
     }
 
      
@@ -154,8 +171,8 @@ function mostrarFiltrados(){
                 <td>${busqueda.vacuna}</td>
                 <td>${busqueda.fechaVacunacion}</td>
                 <td>${busqueda.fechaRevacunacion}</td>
-                <td><i  data-bs-toggle="modal" data-bs-target="#editModal" class="fas fa-edit " onclick ="llenadoForm(${indice})"></i>
-                <td><i class="fa-solid fa-trash-can" onclick='eliminarMascota(${indice})' ></i>
+                <td><span id"tooltipText">Editar</span><i  data-bs-toggle="modal" data-bs-target="#editModal" class="fas fa-edit " onclick ="llenadoForm(${indice})" ></i></td>
+                <td><span id"tooltipText">Eliminar</span><i class="fa-solid fa-trash-can" onclick='eliminarMascota(${indice})' ></i></td>
                 
                 `
 
@@ -174,5 +191,3 @@ function obtenerContactosStorage(){
 obtenerContactosStorage();
 mostrarMascotas();
 
-const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
