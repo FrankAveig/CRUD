@@ -134,8 +134,9 @@ function mostrarMascotas(){
                 <td>${mascota.vacuna}</td>
                 <td>${mascota.fechaVacunacion}</td>
                 <td>${mascota.fechaRevacunacion}</td>
-                <td><i  data-bs-toggle="modal" data-bs-target="#editModal" class="fas fa-edit " onclick ="llenadoForm(${indice})"></i>
-                <td><i class="fa-solid fa-trash-can" onclick='eliminarMascota(${indice})' ></i>
+                <td><span id"tooltipText">Editar</span><i  data-bs-toggle="modal" data-bs-target="#editModal" class="fas fa-edit " onclick ="llenadoForm(${indice})" ></i></td>
+
+                <td><span id"tooltipText">Eliminar</span><i class="fa-solid fa-trash-can" onclick='eliminarMascota(${indice})' ></i></td>
                 
                 `
 
@@ -172,3 +173,6 @@ function obtenerContactosStorage(){
 }
 obtenerContactosStorage();
 mostrarMascotas();
+
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
