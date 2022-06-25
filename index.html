@@ -14,8 +14,8 @@
 
         <h1>Control de vacunación de mascotas</h1>
         <section class="controles">
-            <button onclick="show()">Nuevo ingreso</button>
-            <button>Buscar</button>
+            <button onclick="show('formulario')">Nuevo Ingreso</button>
+            <button onclick="show('formBuscar')">Buscar Mascota</button>
         </section>
 
         
@@ -45,8 +45,14 @@
             </div>
             <div class="">
                 <button type="button" onclick="nuevoIngreso()">Guardar</button>
+                <button type="button" onclick="hide(formulario)">Cancelar</button>
             </div>
         </form>
+    </section>
+
+    <section id="formBuscar" class="hide formBuscar">
+        <input type="text"  id="inputBuscar" onchange="filtrar('asd')">
+        <button onclick="hide(formBuscar)">Cerrar</button>
     </section>
 
     <main>
@@ -85,32 +91,32 @@
                         <h2>Editar</h2>
                         <div class="nombre inputContainer">
                             <label for="">Nombre</label>
-                            <input type="text" id="inputNombre">
+                            <input type="text" id="editNombre">
                         </div>
                         <div class="fechaNacimiento inputContainer">
                             <label for="">Fecha de nacimiento</label>
-                            <input type="date" id="inputFechaNacimiento">
+                            <input type="date" id="editFechaNacimiento">
                         </div>
                         <div class="vacuna inputContainer">
                             <label for="">Vacuna</label>
-                            <input type="text" id="inputVacuna">
+                            <input type="text" id="editVacuna">
                         </div>
                         <div class="fechaVacunacion inputContainer">
                             <label for="">Fecha de Vacunación</label>
-                            <input type="date" id="inputFechaVacunacion">
+                            <input type="date" id="editFechaVacunacion">
                         </div>
                         <div class="fechaRevacunacion inputContainer">
                             <label for="">Fecha de Revacunacion</label>
-                            <input type="date" id="inputFechaRevacunacion">
+                            <input type="date" id="editFechaRevacunacion">
                         </div>
                         <div class="">
-                            <button type="button" onclick="nuevoIngreso()">Guardar</button>
+                            <button type="button" class="btn btn-primary " onclick="editarMascota()">Editar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Understood</button>
+                  
                 </div>
               </div>
             </div>

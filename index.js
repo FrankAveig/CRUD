@@ -4,29 +4,51 @@ const fechaNacimiento = document.getElementById('inputFechaNacimiento');
 const vacuna = document.getElementById('inputVacuna');
 const fechaVacunacion = document.getElementById('inputFechaVacunacion');
 const fechaRevacunacion = document.getElementById('inputFechaRevacunacion');
-const bodyTable = document.getElementById('bodyTable')
-const mascotas = [
+const editNombre = document.getElementById('editNombre');
+const editFechaNacimiento = document.getElementById('editFechaNacimiento');
+const editVacuna = document.getElementById('editVacuna');
+const editFechaVacunacion = document.getElementById('editFechaVacunacion');
+const editFechaRevacunacion = document.getElementById('editFechaRevacunacion');
+const bodyTable = document.getElementById('bodyTable');
+const formBuscar = document.getElementById('formBuscar');
+const buscar = document.getElementById('inputBuscar');
+let indice = 0;
+let mascotas = [
     {
-        nombre:'asdf',
-        fechaNacimiento:'asdf',
-        vacuna:'1',
-        fechaNacimiento:'2',
-        fechaVacunacion:'3',
-        fechaRevacunacion:'3'
+        nombre:'Milo',
+        fechaNacimiento:'2021-06-08',
+        vacuna:'Triple Felina',
+        fechaVacunacion:'2021-07-08',
+        fechaRevacunacion:'2021-08-08'
+    },
+    {
+        nombre:'Oreo',
+        fechaNacimiento:'2022-05-08',
+        vacuna:'Rabia',
+        fechaVacunacion:'2022-06-08',
+        fechaRevacunacion:'2022-07-08'
     }
 ]
+let busqueda= [];
 
-function show(){
-    if(formulario.classList.contains('hide')){
-        formulario.classList.remove('hide')
-    }
-}
+function show(id){
 
-function hide(){
-    if(formulario.classList.contains('.hide')){
-    }else{
+
+    if(id==='formBuscar'){
+        formBuscar.classList.remove('hide')
         formulario.classList.add('hide')
     }
+    if(id==='formulario'){
+        formBuscar.classList.add('hide')
+        formulario.classList.remove('hide')
+    }
+
+     
+   
+}
+
+function hide(id){
+        id.classList.add('hide')
 }
 
 function addMascota (nombre, fechaNacimiento,vacuna,fechaVacunacion,fechaRevacunacion){
@@ -36,14 +58,42 @@ function addMascota (nombre, fechaNacimiento,vacuna,fechaVacunacion,fechaRevacun
         vacuna,
         fechaNacimiento,
         fechaVacunacion,
-        fechaRevacunacion
+        fechaRevacunacion,
     })
+    hide(formulario);
+    mostrarMascotas();
+    
+}
+
+function editarMascota(){
+    mascotas[indice].nombre= editNombre.value;
+    mascotas[indice].fechaNacimiento = editFechaNacimiento.value;
+    mascotas[indice].vacuna = editVacuna.value;
+    mascotas[indice].fechaVacunacion = editFechaVacunacion.value;
+    mascotas[indice].fechaRevacunacion= editFechaRevacunacion.value;
     mostrarMascotas();
 }
 
-function editMascota(indice){
-    mascotas[indice].nombre
+function eliminarMascota(indice){
+    mascotas.splice(indice,1);
+    mostrarMascotas();
 }
+
+function filtrarMascota(query){
+    busqueda = mascotas.filter(mascota=> mascota.nombre.toLocaleLowerCase().includes(query) || mascota.vacuna.toLocaleLowerCase().includes(query) || mascota.fechaVacunacion.includes(query) || mascota.fechaRevacunacion.includes(query))
+    if(query=== ''){
+        mostrarMascotas()
+    }else{
+        mostrarFiltrados()
+    }
+}
+
+buscar.addEventListener('keyup',(e)=>{
+    filtrarMascota(buscar.value.toLocaleLowerCase())
+    console.log(buscar.value)
+},false)
+
+
 function limpiar(){
     nombre.value='';
     fechaNacimiento.value=''; 
@@ -64,6 +114,15 @@ function nuevoIngreso(){
 }
 
 
+function llenadoForm(newIndice){
+    indice= newIndice;
+    editNombre.value = mascotas[indice].nombre;
+    editFechaNacimiento.value= mascotas[indice].fechaNacimiento;
+    editVacuna.value = mascotas[indice].vacuna; 
+    editFechaVacunacion.value = mascotas[indice].fechaVacunacion; 
+    editFechaRevacunacion.value = mascotas[indice].fechaRevacunacion;
+}
+
 
 function mostrarMascotas(){
     bodyTable.innerHTML= '';
@@ -75,11 +134,41 @@ function mostrarMascotas(){
                 <td>${mascota.vacuna}</td>
                 <td>${mascota.fechaVacunacion}</td>
                 <td>${mascota.fechaRevacunacion}</td>
-                <td><i  data-bs-toggle="modal" data-bs-target="#editModal" class="fas fa-edit"></i>
-                <td><i class="fas fa-backspace"></i>
-        
-        `
+                <td><i  data-bs-toggle="modal" data-bs-target="#editModal" class="fas fa-edit " onclick ="llenadoForm(${indice})"></i>
+                <td><i class="fa-solid fa-trash-can" onclick='eliminarMascota(${indice})' ></i>
+                
+                `
+
+    })
+    guardarMascotasStorage()
+}
+
+function mostrarFiltrados(){
+    bodyTable.innerHTML= '';
+    busqueda.forEach(function(busqueda,indice) {
+        bodyTable.innerHTML += `
+                <td>${indice +1}</td>
+                <td>${busqueda.nombre}</td>
+                <td>${busqueda.fechaNacimiento}</td>
+                <td>${busqueda.vacuna}</td>
+                <td>${busqueda.fechaVacunacion}</td>
+                <td>${busqueda.fechaRevacunacion}</td>
+                <td><i  data-bs-toggle="modal" data-bs-target="#editModal" class="fas fa-edit " onclick ="llenadoForm(${indice})"></i>
+                <td><i class="fa-solid fa-trash-can" onclick='eliminarMascota(${indice})' ></i>
+                
+                `
+
     })
 }
 
+function guardarMascotasStorage(){
+    const mascotasGuardar = JSON.stringify(mascotas)
+    localStorage.setItem('mascotas',mascotasGuardar);
+}
+
+function obtenerContactosStorage(){
+    const mascotasStorage =localStorage.getItem('mascotas');
+    mascotas = mascotasStorage == null ? mascotas : JSON.parse(mascotasStorage)
+}
+obtenerContactosStorage();
 mostrarMascotas();
